@@ -1,0 +1,7 @@
+{
+	"provider": "S3",
+	"bucket": "bucket",
+	"region": "region",
+	"directory": "directory",
+	"backup_directory": "backup_directory"
+}

@@ -1,0 +1,47 @@
+group 'org.dartanon'
+version '0.1'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 9
+// needed for AWS SDK because it still uses deprecated shit
+applicationDefaultJvmArgs = ['--add-modules=java.xml.bind,java.activation']
+mainClassName = 'Main'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.228'
+	}
+}
+
+dependencies {
+	compile 'com.amazonaws:aws-java-sdk-s3'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.4'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+}
+
+test {
+	failFast = true
+	useJUnitPlatform {
+		excludeTags 'slow'
+	}
+	testLogging {
+		events 'passed', 'skipped', 'failed'
+	}
+}

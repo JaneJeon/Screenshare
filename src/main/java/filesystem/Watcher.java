@@ -18,7 +18,7 @@ public class Watcher {
 	
 	// watch directory for any new files or changes in filename
 	public void detectNewFiles(String directory) throws IOException, InterruptedException {
-		WatchService watchService = FileSystems.getDefault().newWatchService();
+		var watchService = FileSystems.getDefault().newWatchService();
 		Paths.get(directory).register(
 			watchService, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_MODIFY
 		);

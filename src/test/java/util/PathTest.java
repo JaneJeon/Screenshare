@@ -13,6 +13,6 @@ class PathTest {
 	@Test
 	void getHomePath() {
 		assertEquals("/Desktop", Path.absolute("/Desktop"));
-		assertEquals("/Users/SungilAhn/Desktop", Path.absolute("~/Desktop"));
+		assertEquals("/Users/JaneJeon/Desktop", Path.absolute("~/Desktop"));
 	}
 }

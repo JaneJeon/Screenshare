@@ -5,7 +5,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'io.spring.dependency-management'
 
-sourceCompatibility = 9
+sourceCompatibility = 10
+
 // needed for AWS SDK because it still uses deprecated shit
 applicationDefaultJvmArgs = ['--add-modules=java.xml.bind,java.activation']
 mainClassName = 'Main'
@@ -32,6 +33,9 @@ dependencyManagement {
 dependencies {
 	compile 'com.amazonaws:aws-java-sdk-s3'
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.4'
+	compile group: 'com.backblaze.b2', name: 'b2-sdk-core', version: '1.2.0'
+	compile group: 'com.backblaze.b2', name: 'b2-sdk-httpclient', version: '1.2.0'
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
 }

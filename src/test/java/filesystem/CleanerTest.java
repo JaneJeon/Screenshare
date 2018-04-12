@@ -35,7 +35,7 @@ class CleanerTest {
 		// put some files
 		fakeFiles.forEach(f -> new File(testDirectory, f));
 		new File(testDirectory, badDirectory);
-		List<String> result = Cleaner.sweep(testDirectory);
+		var result = Cleaner.sweep(testDirectory);
 		result.forEach(file -> assertTrue(Files.isRegularFile(Paths.get(file))));
 		
 		// TODO: assert that the files have the same name? - do I really need to do this?
@@ -47,7 +47,7 @@ class CleanerTest {
 	static void cleanup() {
 		// Java can't delete folders with files in it
 		if (Files.exists(Paths.get(testDirectory))) {
-			final File folder = new File(testDirectory);
+			final var folder = new File(testDirectory);
 			// no need for recursion
 			Arrays.stream(Objects.requireNonNull(folder.list()))
 				.forEach(file -> new File(folder, file).delete());

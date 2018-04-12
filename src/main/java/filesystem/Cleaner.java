@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 // performs initial filesystem sweep
 public class Cleaner {
@@ -20,7 +19,7 @@ public class Cleaner {
 		if (!Files.isDirectory(new File(directory).toPath()))
 			throw new RuntimeException("Input is not a directory!");
 		
-		try (Stream<Path> paths = Files.walk(Paths.get(directory))) {
+		try (var paths = Files.walk(Paths.get(directory))) {
 			return paths.filter(Files::isRegularFile)
 				.map(Path::toString)
 				.collect(Collectors.toList());
